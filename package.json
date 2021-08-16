@@ -1,0 +1,24 @@
+{
+  "name": "2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aayush-b1999/tsc2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aayush-b1999/tsc2/issues"
+  },
+  "homepage": "https://github.com/aayush-b1999/tsc2#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1",
+    "liteserver": "^0.3.0"
+  }
+}
