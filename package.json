@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/aayush-b1999/tsc2#readme",
   "dependencies": {
-    "lite-server": "^2.6.1",
-    "liteserver": "^0.3.0"
+    "lite-server": "^2.6.1"
   }
 }
