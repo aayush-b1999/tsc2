@@ -1,5 +1,6 @@
 "use strict";
 // advanced types 
+var _a;
 var peter = {
     name: "Peter",
     priveleges: ["create-server", "mantain-server"],
@@ -51,3 +52,44 @@ var car = new gaadi();
 var bigTruck = new truck();
 useVehicle(bigTruck);
 useVehicle(car);
+function movingAnimal(a) {
+    var speed;
+    switch (a.type) {
+        case 'Bird':
+            speed = a.flyingSpeed;
+            break;
+        case 'Horse':
+            speed = a.runningSpeed;
+            break;
+    }
+    console.log('Animal moves at ' + speed);
+}
+movingAnimal({ type: 'Bird', flyingSpeed: 100 });
+movingAnimal({ type: 'Horse', runningSpeed: 200 });
+// typecasting html elements
+// const textBox=<HTMLInputElement>document.getElementById('text-box');
+var textBox = document.getElementById('text-box');
+textBox.value = "Hi Everyone!!";
+var errorBag = {
+    email: "Wrong one",
+    // username:1  // not working key-value should be string-string
+};
+function addition(a, b) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+var res = addition('The ', 'Rock');
+res.split(' ');
+// optional chaining
+var fetchUserData = {
+    id: 'u1',
+    name: 'Arnold',
+    job: { title: 'CEO', description: 'Running the company' } // if job didn't exist while fetching stuff from backend  then below ? optional chaining would check inside console.log
+};
+console.log((_a = fetchUserData === null || fetchUserData === void 0 ? void 0 : fetchUserData.job) === null || _a === void 0 ? void 0 : _a.description);
+// nullish coalescing
+var dwayne = '';
+var johnson = dwayne !== null && dwayne !== void 0 ? dwayne : 'Default'; // empty string is treadted as falsy so if we use || operator then empty string will be replaced by deafult value.
+console.log(johnson);

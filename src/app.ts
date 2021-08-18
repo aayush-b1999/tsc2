@@ -98,3 +98,90 @@ let bigTruck=new truck();
 
 useVehicle(bigTruck);
 useVehicle(car);
+
+// discriminated union- common property with different value
+interface Bird{
+    flyingSpeed:number;
+    type:'Bird';
+}
+
+interface Horse{
+    runningSpeed:number;
+    type:'Horse';
+}
+
+type Jaanwar=Bird|Horse;
+
+function movingAnimal(a:Jaanwar){
+    let speed:number;
+    switch(a.type){
+        case 'Bird':speed=a.flyingSpeed;
+        break;
+        case 'Horse':speed=a.runningSpeed;
+        break;
+    }
+    console.log('Animal moves at '+speed);
+    
+}
+movingAnimal({type:'Bird',flyingSpeed:100});
+movingAnimal({type:'Horse',runningSpeed:200});
+
+// typecasting html elements
+// const textBox=<HTMLInputElement>document.getElementById('text-box');
+const textBox=document.getElementById('text-box') as HTMLInputElement;
+
+textBox.value="Hi Everyone!!";
+
+// index properties- flexible properties
+interface ErrorContainer{
+    [prop:string]:string;
+}
+
+let errorBag:ErrorContainer={
+    email:"Wrong one",
+    // username:1  // not working key-value should be string-string
+}
+
+
+function addition(a:number,b:number):number;
+function addition(a:string,b:string):string;
+function addition(a:string,b:number):string;
+function addition(a:number,b:string):string;
+function addition(a:Combinable,b:Combinable){
+    if(typeof a==='string' || typeof b==='string'){
+        return a.toString()+b.toString();
+    }
+    return a+b;
+}
+
+const res=addition('The ','Rock');
+res.split(' ');
+
+// optional chaining
+
+const fetchUserData={
+    id:'u1',
+    name:'Arnold',
+    job:{title:'CEO',description:'Running the company'} // if job didn't exist while fetching stuff from backend  then below ? optional chaining would check inside console.log
+}
+
+console.log(fetchUserData?.job?.description)
+
+// nullish coalescing
+
+let dwayne='';
+let johnson=dwayne??'Default';  // empty string is treadted as falsy so if we use || operator then empty string will be replaced by deafult value.
+console.log(johnson);
+
+
+
+
+
+
+
+
+
+
+
+
+
