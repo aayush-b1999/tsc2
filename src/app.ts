@@ -1,81 +1,100 @@
-// Classes 
-class Person{
-    name: string;
-    age: number;
-    constructor(n:string,a:number){
-        this.name=n;
-        this.age=a;
+// advanced types 
+
+// intersection types
+type Admin={
+    name:string;
+    priveleges:string[]
+}
+
+type Employee={
+    name:string;
+    startDate:Date;
+}
+
+type ElavatedEmployee= Admin&Employee;
+
+let peter:ElavatedEmployee={
+    name:"Peter",
+    priveleges:["create-server","mantain-server"],
+    startDate:new Date()
+}
+// OR
+
+// interface Admin{
+//     name:string;
+//     priveleges:string[]
+// }
+
+// interface Employee{
+//     name:string;
+//     startDate:Date;
+// }
+
+// interface ElavatedEmployee extends Admin,Employee{}
+
+// let peter:ElavatedEmployee={
+//     name:"Peter",
+//     priveleges:["create-server","mantain-server"],
+//     startDate:new Date()
+// }
+
+type Combinable=number|string;
+type numeric=number|boolean;
+
+type inter=Combinable&numeric;
+
+let val:inter=12;
+
+// typeguard
+
+function combine(a:Combinable,b:Combinable){
+    if(typeof a==="string" || typeof b==="string"){
+        return a.toString()+b.toString();
     }
-    say(this:Person){
-        console.log(this.name);
+    return a+b;
+}
+
+type UnknownEmployee=Admin|Employee;
+
+// checking in union of two custom types
+
+function printEmployeeInfo(a:UnknownEmployee){
+    console.log(a.name);
+    if("startDate" in a)
+    console.log(a.startDate);
+    if('priveleges' in a)
+    console.log(a.priveleges);
+}
+
+printEmployeeInfo({name:'John Cena',startDate:new Date()});
+
+// checking the variable's structure similarity to classes
+
+class gaadi{
+    driving(){
+        console.log("driving");
     }
 }
 
-const aayush=new Person("Aayush Bhatnagar",22);
-console.log(aayush);
-
-const dummy={name: "Dummy",age: 10,say:aayush.say};
-dummy.say();
-
-// private and public(Default)
-class Department{
-    name: string;
-    protected employees: string[]=[];
-    constructor(n:string){
-        this.name=n;
+class truck{
+    driving(){
+        console.log("driving a truck .. ");
     }
-    describe(this: Department){
-        console.log('Department: '+this.name);
-    }
-    addEmployee(this:Department,employee:string){
-        this.employees.push(employee);
-    }
-    employeeList(this:Department){
-        console.log(this.employees.length);
-        console.log(this.employees);
+    loading(a:number){
+        console.log("loaded "+ a +" amount of goods");
     }
 }
 
-const developer=new Department("Developer");
-developer.addEmployee("Aayush Bhatnagar");
-developer.addEmployee("Akshat Gupta");
-developer.employeeList();
+type Vehicle=gaadi|truck;
 
-// developer.employees[1]="KOI hai"
-
-
-// shorthand initialization
-
-class Car{
-    constructor(public readonly name:string,private type:string){
-        
-    }
-    describe(this:Car){
-        console.log(`The car is: ${this.name} and type is ${this.type}`);
-        
-    }
+function useVehicle(a:Vehicle){
+    a.driving();
+    if(a instanceof truck)
+    a.loading(1000);
 }
 
-const creta=new Car("Creta","SUV");
-// creta.name="City";
-creta.describe();
+let car=new gaadi();
+let bigTruck=new truck();
 
-// Inheritance - protected is also there as access modifier
-class ItDepartment extends Department{
-    constructor(n:string,public adminList:string[]){
-        super(n);
-    }
-    printAdmins(this:ItDepartment){
-        console.log(this.adminList);
-    }
-    addEmployee(employee:string){
-        if(employee==="Saksham")return;
-        this.employees.push(employee);
-    }
-}
-
-const hyd=new ItDepartment('IT',["Saksham Maggo","Sahil Jamwal"])
-hyd.printAdmins();
-hyd.addEmployee("Akshat Gupta");
-hyd.employeeList();
-
+useVehicle(bigTruck);
+useVehicle(car);
